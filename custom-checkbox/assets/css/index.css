@@ -1,0 +1,80 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(#555, #292929);
+}
+
+label {
+  position: relative;
+  width: 300px;
+  height: 150px;
+  background-color: #3e3e3e;
+  border-radius: 75px;
+  border: 5px solid rgb(39, 31, 31);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+label input {
+  appearance: none;
+}
+
+label .coffee-cup {
+  position: absolute;
+  left: 0;
+  width: 175px;
+  height: 150px;
+  background-image: url(../img/Coffee_01.png);
+  background-size: auto 150px;
+  background-repeat: no-repeat;
+  transition: 0.5s;
+  transform: rotate(-180deg);
+  transform-origin: 72px;
+}
+
+label .smoke {
+  position: absolute;
+  background-image: url("");
+  width: 175px;
+  height: 150px;
+  transition: 0.5s;
+}
+
+label input:checked ~ .coffee-cup {
+  left: 150px;
+  background-image: url(../img/Coffee_02.png);
+  background-size: auto 150px;
+  background-repeat: no-repeat;
+  transform: rotate(360deg);
+}
+
+label input:checked ~ .smoke {
+  bottom: 100px;
+  left: 150px;
+  background-image: url(../img/smoke-gif-transparent-10.gif);
+  background-size: auto 150px;
+  background-repeat: no-repeat;
+  transform: rotate(360deg);
+}
+
+label .on {
+  font-size: 2rem;
+  transform: translateX(calc(-24vh));
+}
+
+label .off {
+  font-size: 2rem;
+  transform: translateX(calc(24vh));
+}
