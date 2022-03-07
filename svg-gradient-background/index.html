@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>svg-gradient-background</title>
+    <link rel="stylesheet" href="svg-gradient-background/index.css" />
+  </head>
+  <body>
+    <svg width="100%" height="100%">
+      <rect fill="url(#logo-gradient)" width="100%" height="100%"></rect>
+      <defs>
+        <linearGradient id="logo-gradient" x1="50%" y1="0%" x2="50%" y2="100%">
+          <stop offset="100%" stop-color="#01FF89">
+            <animate
+              attributeName="stop-color"
+              values="#ba141a;#ee303d;#982246;#b41e8e;#4d2682;#00b5dc;#008355;#81bc40;#f6871f;#d36226"
+              dur="15s"
+              repeatCount="indefinite"
+            ></animate>
+          </stop>
+        </linearGradient>
+      </defs>
+    </svg>
+  </body>
+</html>
