@@ -1,0 +1,21 @@
+{
+  "name": "countdown",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "watch": "npx tailwindcss -i ./assets/css/index.css ./assets/scss/under-constrction.scss -o ./public/css/index.css --watch",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.7",
+    "tailwindcss": "^3.0.23",
+    "vite": "^2.8.0"
+  },
+  "dependencies": {
+    "daisyui": "^2.4.0",
+    "sass": "^1.49.9"
+  }
+}
