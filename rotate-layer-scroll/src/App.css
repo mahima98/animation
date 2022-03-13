@@ -1,0 +1,36 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 200vh;
+}
+
+.filled-text {
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  z-index: 1;
+  font-size: 100px;
+  font-weight: 600;
+}
+
+.outline-text {
+  position: absolute;
+  top: 200px;
+  left: 100px;
+  z-index: 3;
+  font-size: 100px;
+  font-weight: 600;
+  -webkit-text-stroke-width: 4px;
+  -webkit-text-stroke-color: ghostwhite;
+  color: transparent;
+}
+
+.layerImage {
+  position: absolute;
+  top: 50px;
+  left: 600px;
+  z-index: 2;
+  height: 400px;
+  width: auto;
+}
