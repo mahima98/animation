@@ -2,7 +2,6 @@ import { gsap } from "gsap";
 import "./App.css";
 
 function App() {
-
   window.addEventListener("scroll", function () {
     let layer = document.getElementById("divId");
     layer.innerHTML = window.pageYOffset + "px";
