@@ -2,12 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
   height: 500vh;
   margin: 0;
 }
-
 
 .line-container {
   position: fixed;
@@ -26,18 +24,8 @@ svg {
 
 section {
   height: 100vh;
-  display: gid;
+  display: grid;
   place-content: center;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 2em;
-}
-
-.one {
-  background: url('https://picsum.photos/seed/picsum/900/600');
-  background-size: cover;
-}
-
-.two {
-  background: url('https://picsum.photos/900/600?grayscale');
-  background-size: cover;
 }
