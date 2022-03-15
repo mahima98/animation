@@ -43,14 +43,10 @@ function App() {
     })
    });
 
-
-
-
   return (
     <div className="App">
       <Header></Header>
       <div className="line-container">
-
         <svg width="147" height="881" viewBox="0 0 147 881" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M130 0V117V127.5L20 257.5L130 396L20 558L130 686V880.5" stroke="black" strokeWidth="4"/>
             <ellipse className="circle1" cx="128.5" cy="126.5" rx="14.5" ry="15.5" fill="#C4C4C4"/>
