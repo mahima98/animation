@@ -3,75 +3,69 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Layer from "./Layer";
 import Sections from "./Sections";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Header from "./Header";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin.js";
+
 
 function App() {
-  gsap.registerPlugin(ScrollTrigger);
-
-  window.addEventListener("scroll", function () {
-    let layer = document.getElementById("divId");
-    layer.innerHTML = window.pageYOffset + "px";
-    if (window.pageYOffset < 150) {
-      layer.style.clipPath = `polygon(${window.pageYOffset / 10}% ${
-        window.pageYOffset / 50
-      }%, ${100 - window.pageYOffset / 30}% 0, ${
-        100 - window.pageYOffset / 10
-      }% 100%, 0% 100%)`;
-    }
-  });
+  gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+  gsap.defaults({ease: "none"});
 
   useEffect(() => {
-    gsap.to(".filled-text, .outline-text", {
-      scrollTrigger: {
-        trigger: ".filled-text, .outline-text",
-        start: "top center",
-        end: "top 100px",
-        scrub: 1,
-      },
-      x: -100,
-    });
+    let path = document.querySelector('path')
+    console.log(path)
+    let pathLength = path.getTotalLength()
+    console.log(pathLength)
 
-    gsap.to(".layerImage", {
-      scrollTrigger: {
-        trigger: ".layerImage",
-        start: "top center",
-        end: "top center",
-        scrub: 1,
-      },
-    });
+    path.style.strokeDasharray = pathLength + " " + pathLength;
+    path.style.strokeDashoffset = pathLength;
 
-    gsap.utils.toArray(".layer").forEach((layer, i) => {
-      ScrollTrigger.create({
-        trigger: layer,
-        start: "top top",
-        pin: true,
-        pinSpacing: false,
-      });
-    });
+    window.addEventListener("scroll", () => {
+      // what % down is it ?
+      let scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+      console.log('scrollPercentage', scrollPercentage)
+      //Length to offset the dashes
+      let drawLength = pathLength * scrollPercentage;
+      //Draw in rverse 
+      path.style.strokeDashoffset = pathLength - drawLength;
 
-    ScrollTrigger.create({
-      snap: 1 / 4, // snap whole page to the closest section!
-    });
-  });
+
+      let circle1 = document.querySelector(".circle1");
+      let circle2 = document.querySelector(".circle2");
+      console.log('circle1', circle1)
+      if(scrollPercentage > "0.11")  {
+        circle1.style.fill = "#EF4136";
+      }
+      if(scrollPercentage > "0.27")  {
+        circle2.style.fill = "blue";
+      }
+    })
+   });
+
+
+
 
   return (
     <div className="App">
-      <Header className="z-[99] bg-blue-100"></Header>
-      <Layer id="layer-1" color="bg-red-300 h-[100vh]">
-        <Sections className="">
-          <h2 className="filled-text">SELECTIVE FOCUS</h2>
-          <h2 className="outline-text">SELECTIVE FOCUS</h2>
-          <img
-            id="divId"
-            className="layerImage"
-            src="https://picsum.photos/400/300.jpg"
-            alt=""
-          ></img>
-        </Sections>
+      <Header></Header>
+      <div className="line-container">
+
+        <svg width="147" height="881" viewBox="0 0 147 881" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M130 0V117V127.5L20 257.5L130 396L20 558L130 686V880.5" stroke="black" strokeWidth="4"/>
+            <ellipse className="circle1" cx="128.5" cy="126.5" rx="14.5" ry="15.5" fill="#C4C4C4"/>
+            <circle  className="circle2" cx="16.5" cy="255.5" r="16.5" fill="#C4C4C4"/>
+            <circle  className="circle3" cx="126.5" cy="396.5" r="16.5" fill="#C4C4C4"/>
+            <circle  className="circle4" cx="20.5" cy="558.5" r="16.5" fill="#C4C4C4"/>
+            <circle  className="circle5"  cx="130.5" cy="682.5" r="16.5" fill="#C4C4C4"/>
+        </svg>
+      </div>
+      <Layer name="one">
+        <Sections>Layer one</Sections>
       </Layer>
-      <Layer id="layer-2" color="bg-purple-200  h-[100vh]"></Layer>
-      <Layer id="layer-3" color="bg-yellow-200 h-[100vh]"></Layer>
+      <Layer name="two">
+        <Sections>Layer two</Sections>
+      </Layer>
     </div>
   );
 }

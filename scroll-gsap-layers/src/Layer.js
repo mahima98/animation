@@ -1,13 +1,13 @@
 import React from "react";
 
-export default function Layer(props) {
+export default function Layer({children , name,  color, id}) {
   return (
     <div
       className={
-        "layer flex justify-center items-center " + props.color + " " + props.id
+        "layer " + color + " " + id + " " + name
       }
     >
-      {props.children}
+      {children}
     </div>
   );
 }
