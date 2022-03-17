@@ -18,6 +18,14 @@ function App() {
     let circle5 = document.querySelector(".circle5");
 
     let layerTwo = document.querySelector('.layerTwo');
+    let layerThree = document.querySelector('.layerThree');
+    let layerFour = document.querySelector('.layerFour');
+    let layerFive = document.querySelector('.layerFive');
+
+    let section2 = document.querySelector('.section2');
+    let section3 = document.querySelector('.section3');
+    let section4 = document.querySelector('.section4');
+    let section5 = document.querySelector('.section5');
 
     let path = document.querySelector("path");
     let pathLength = path.getTotalLength();
@@ -36,13 +44,28 @@ function App() {
     circle4.style.fill = "none";
     circle5.style.fill = "none";
 
+    // let tl2 = gsap.timeline();
+    // tl2.to("#scrollingText", {
+    //   x:1000,
+    //   duration:50,
+    //   repeat:-1,
+    //   ease:'linear'
+    // })
+    // let tl = gsap.timeline();
+    // tl.to('#scrollingText', {
+    //   xPercent:15,
+    //   scrollTrigger:{
+    //     trigger:"#scrollingText",
+    //     scrub:1,
+    //     markers: true
+    //   }
+    // })
 
     window.addEventListener("scroll", () => {
       // what % down is it ?
       let scrollPercentage =
         (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight -  document.documentElement.clientHeight);
       let roundOff = Math.round(scrollPercentage * 100)
-      console.log(roundOff)
       //Length to offset the dashes
       let drawLength = pathLength * scrollPercentage;
       //Draw in reverse
@@ -50,7 +73,7 @@ function App() {
      
       // layer 1 animations
       if (roundOff > 3) {
-        circle1.style.fill = "#D36226";
+        circle1.style.fill = "#00B5DC";
         if(countCircle1 === 0 ){
           countCircle1 = countCircle1 + 1;         
           gsap.to(circle1, {
@@ -69,7 +92,7 @@ function App() {
       } 
       // layer 2 animations
       if (roundOff > 23) {
-        circle2.style.fill = "#2F8355";
+        circle2.style.fill = "#D36226";
         if(countCircle2 === 0 ){
           countCircle2 = countCircle2 + 1;
           gsap.to(circle2, {
@@ -79,18 +102,16 @@ function App() {
               end: "top 400px",
               scrub: true,
               onEnter: () => {
-                layerTwo.classList.add('bg-teal-500');
+                layerTwo.classList.add('layerTwoGradient');
                 
               },
-              
               onLeaveBack: () => {
                 circle2.style.fill = "none";
-                layerTwo.classList.remove('bg-teal-500');
+                layerTwo.classList.remove('layerTwoGradient');
               },
             }
           })
 
-          let section2 = document.querySelector('.section2');
           section2.classList.remove('hidden')
           gsap.fromTo(".layerTwo-right", {opacity: 0, x: -100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.5})
           gsap.fromTo(".layerTwo-left", {opacity: 0, x: 100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.8})
@@ -101,8 +122,7 @@ function App() {
       // layer 3 animations
       if (roundOff > 43) {
         circle3.style.fill = "#4D2682";
-        let layerThree = document.querySelector('.layerThree');
-        layerThree.classList.add('bg-purple-400');
+        layerThree.classList.add('layerThreeGradient');
         if(countCircle3 === 0 ){
           countCircle3 = countCircle3 + 1;
           gsap.to(circle3, {
@@ -115,13 +135,11 @@ function App() {
               },
               onLeaveBack: () => {
                 circle3.style.fill = "none";
-                layerThree.classList.remove('bg-purple-400');
+                layerThree.classList.remove('layerThreeGradient');
               },
-            
             }
           })
 
-          let section3 = document.querySelector('.section3');
           section3.classList.remove('hidden')
           gsap.fromTo(".layerThree-right", {opacity: 0, x: -100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.8})
           gsap.fromTo(".layerThree-left", {opacity: 0, x: 100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.5})
@@ -131,9 +149,10 @@ function App() {
       }
       // layer 4 animations
       if (roundOff > 63) {
-        circle4.style.fill = "#982246";
-        let layerFour = document.querySelector('.layerFour');
-        layerFour.classList.add('bg-pink-400');
+        console.log(roundOff)
+        circle4.style.fill = "#F68720";
+        layerFour.classList.add('bg-[#F68720]');
+
         if(countCircle4 === 0 ){
           countCircle4 = countCircle4 + 1;
           gsap.to(circle4, {
@@ -146,12 +165,11 @@ function App() {
               },
               onLeaveBack: () => {
                 circle4.style.fill = "none";
-                layerFour.classList.remove('bg-pink-400');
-              }
+                layerFour.classList.remove('bg-[#F68720]');
+              }             
             }
           })
 
-          let section4 = document.querySelector('.section4');
           section4.classList.remove('hidden')
           gsap.fromTo(".layerFour-right", {opacity: 0, x: -100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.5})
           gsap.fromTo(".layerFour-left", {opacity: 0, x: 100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.8})        
@@ -161,31 +179,34 @@ function App() {
       }
       // layer 5 animations
       if (roundOff > 88) {
-        circle5.style.fill = "#BA1719";
+        console.log(roundOff)
+        circle5.style.fill = "#81BC40";
         if(countCircle5 === 0 ){
           countCircle5 = countCircle5 + 1;
-          let layerFive = document.querySelector('.layerFive');
-          console.log('layerFive', layerFive)
-          layerFive.classList.add('bg-red-500');
+          layerFive.classList.add('bg-[#81BC40]');
           gsap.to(circle5, {
             scrollTrigger: {
               trigger: circle5,
               start: "top 750px",
-              end: "top 690px",
+              end: "top 590px",
               scrub: true,
               onEnter: () => {
-                console.log("enter")
-                layerFive.classList.add('bg-red-500');
+                console.log('enter');
+                layerFive.classList.add('bg-[#81BC40]')
+              },
+              onLeave: () => {
+                console.log('leave');
               },
               onLeaveBack: () => {
-                console.log("leave back")
-                layerFive.classList.remove('bg-red-500');
+                console.log('on leave back -')
+                console.log(circle5)
                 circle5.style.fill = "none";
+                layerFive.classList.remove('bg-[#81BC40]');
               },
+              markers: true
             }
           })
 
-          let section5 = document.querySelector('.section5');
           section5.classList.remove('hidden')
           gsap.fromTo(".layerFive-right", {opacity: 0, x: -100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.5})
           gsap.fromTo(".layerFive-left", {opacity: 0, x: 100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.8})
@@ -196,7 +217,7 @@ function App() {
     });
 
     gsap.fromTo(".layerOne", {opacity: 0}, {opacity: 1, duration: 2})
-    gsap.fromTo(".sectionOne", {opacity: 0, x: -100}, {opacity: 1, duration: 1, x: 0})
+    gsap.fromTo(".sectionOne", {opacity: 0, x: -100}, {opacity: 1, duration: 1, x: 0, color: "#00B5DC"})
   }, []);
 
   return (
@@ -204,7 +225,7 @@ function App() {
       <Header></Header>
       <div className="line-container z-10">
         <svg width="200" height="702" viewBox="0 0 155 702" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M105.5 0.5C-195 186 364.5 468.5 61 701.5" stroke="black"/>
+          <path d="M105.5 0.5C-195 186 364.5 468.5 61 701.5" stroke="black" strokeWidth="2"/>
           <circle className="circle1" cx="79" cy="14" r="14" fill="none"/>
           <circle className="circle2" cx="14" cy="160" r="14" fill="none"/>
           <circle className="circle3" cx="70" cy="297" r="14" fill="none"/>
@@ -212,15 +233,20 @@ function App() {
           <circle className="circle5" cx="126" cy="627" r="14" fill="none"/>
         </svg>
       </div>
-      <Layer name="layerOne" color="bg-orange-400">
-        <Sections styling="sectionOne flex justify-center items-center">
+      <Layer name="layerOne" color="">
+        <Sections styling="sectionOne flex justify-center items-center text-[5em] font-extrabold">
           Digital!
         </Sections>
       </Layer>
       <Layer name="layerTwo">
-        <Sections styling="section2 hidden flex justify-center items-center gap-8">
-          <img className="layerTwo-right" src="https://picsum.photos/500/300?grayscale" alt="example"></img>
-          <div className="layerTwo-left text-7xl">QA</div>
+        <Sections styling="section2 hidden">
+          <div className="flex justify-center items-center gap-8">
+            <img className="layerTwo-right" src="https://picsum.photos/500/300?grayscale" alt="example"></img>
+            <div className="layerTwo-left text-[5em] font-extrabold">QA</div>
+          </div>
+          <div className="para text-md mt-10" id="scrollingText">
+          Lorem ipsum dolor sit amet. Et veniam accusantium qui voluptate fugit et eveniet veniam est aliquam aliquid. 
+          </div>
         </Sections>
       </Layer>
       <Layer name="layerThree">
@@ -241,6 +267,8 @@ function App() {
           <div className="layerFive-left text-7xl">CGI</div>
         </Sections>
       </Layer>
+
+     
     </div>
   );
 }

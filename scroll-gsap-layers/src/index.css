@@ -27,5 +27,12 @@ section {
   display: grid;
   place-content: center;
   font-family: "Courier New", Courier, monospace;
-  font-size: 2em;
+}
+
+.layerTwoGradient {
+  @apply bg-gradient-to-t from-[#d36226] via-[#cb7142] to-[#f4a77e];
+}
+
+.layerThreeGradient {
+@apply bg-gradient-to-r from-[#4d2682] via-[#6424ba] to-[#9e6ce2]
 }
