@@ -17,10 +17,11 @@ function App() {
     let circle4 = document.querySelector(".circle4");
     let circle5 = document.querySelector(".circle5");
 
-    let layerTwo = document.querySelector('.layerTwo');
-    let layerThree = document.querySelector('.layerThree');
-    let layerFour = document.querySelector('.layerFour');
-    let layerFive = document.querySelector('.layerFive');
+    let layer1 = document.querySelector('.layer1');
+    let layer2 = document.querySelector('.layer2');
+    let layer3 = document.querySelector('.layer3');
+    let layer4 = document.querySelector('.layer4');
+    let layer5 = document.querySelector('.layer5');
 
     let section2 = document.querySelector('.section2');
     let section3 = document.querySelector('.section3');
@@ -44,35 +45,33 @@ function App() {
     circle4.style.fill = "none";
     circle5.style.fill = "none";
 
-    // let tl2 = gsap.timeline();
-    // tl2.to("#scrollingText", {
-    //   x:1000,
-    //   duration:50,
-    //   repeat:-1,
-    //   ease:'linear'
-    // })
-    // let tl = gsap.timeline();
-    // tl.to('#scrollingText', {
-    //   xPercent:15,
-    //   scrollTrigger:{
-    //     trigger:"#scrollingText",
-    //     scrub:1,
-    //     markers: true
-    //   }
-    // })
+    let layer2TextAnimation = [
+      {
+        name: "text1",
+        translateX: "300"
+      },
+      {
+        name: "text2",
+        translateX: "200"
+      },
+      {
+        name: "text3",
+        translateX: "200"
+      }
+    ]
 
     window.addEventListener("scroll", () => {
       // what % down is it ?
       let scrollPercentage =
         (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight -  document.documentElement.clientHeight);
-      let roundOff = Math.round(scrollPercentage * 100)
+      let roundOffScrollPerc = Math.round(scrollPercentage * 100)
       //Length to offset the dashes
       let drawLength = pathLength * scrollPercentage;
       //Draw in reverse
       path.style.strokeDashoffset = pathLength - drawLength;
      
       // layer 1 animations
-      if (roundOff > 3) {
+      if (roundOffScrollPerc > 3) {
         circle1.style.fill = "#00B5DC";
         if(countCircle1 === 0 ){
           countCircle1 = countCircle1 + 1;         
@@ -91,8 +90,25 @@ function App() {
         })}
       } 
       // layer 2 animations
-      if (roundOff > 23) {
+      if (roundOffScrollPerc > 23) {
         circle2.style.fill = "#D36226";
+        layer2TextAnimation.forEach(element => {
+          for (let i = 1; i < 4; i++) {
+            console.log(2)
+            gsap.to(`.${element.name}`, {
+              scrollTrigger: {
+                trigger: `.${element.name}`,
+                start: "top top",
+                end: "+=400",
+                scrub: 1,
+                toggleActions: "restart pause reverse pause",
+              },
+              x: `${element.translateX}`,
+              duration: 1.5
+            })
+          }
+        });
+
         if(countCircle2 === 0 ){
           countCircle2 = countCircle2 + 1;
           gsap.to(circle2, {
@@ -102,27 +118,28 @@ function App() {
               end: "top 400px",
               scrub: true,
               onEnter: () => {
-                layerTwo.classList.add('layerTwoGradient');
+                layer2.classList.add('layer2-Gradient');
                 
               },
               onLeaveBack: () => {
                 circle2.style.fill = "none";
-                layerTwo.classList.remove('layerTwoGradient');
+                layer2.classList.remove('layer2-Gradient');
               },
             }
           })
 
           section2.classList.remove('hidden')
-          gsap.fromTo(".layerTwo-right", {opacity: 0, x: -100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.5})
-          gsap.fromTo(".layerTwo-left", {opacity: 0, x: 100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.8})
+          gsap.fromTo(".layer2-right", {opacity: 0, x: -100}, {opacity: 1, x: 0, delay: 0.2, duration: 1})
+          gsap.fromTo(".layer2-left", {opacity: 0, x: 100}, {opacity: 1, x: 0, delay: 0.5, duration: 1})
 
-          gsap.fromTo(".layerTwo", {opacity: 0}, {opacity: 1, duration: 1.0, ease:'none'})
+          gsap.fromTo(".layer2", {opacity: 0}, {opacity: 1, duration: 1.0, ease:'none'})
       }
       }
       // layer 3 animations
-      if (roundOff > 43) {
+      if (roundOffScrollPerc > 43) {
         circle3.style.fill = "#4D2682";
-        layerThree.classList.add('layerThreeGradient');
+        layer3.classList.add('layer3-Gradient');
+
         if(countCircle3 === 0 ){
           countCircle3 = countCircle3 + 1;
           gsap.to(circle3, {
@@ -135,23 +152,23 @@ function App() {
               },
               onLeaveBack: () => {
                 circle3.style.fill = "none";
-                layerThree.classList.remove('layerThreeGradient');
+                layer3.classList.remove('layer3-Gradient');
               },
             }
           })
 
           section3.classList.remove('hidden')
-          gsap.fromTo(".layerThree-right", {opacity: 0, x: -100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.8})
-          gsap.fromTo(".layerThree-left", {opacity: 0, x: 100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.5})
+          gsap.fromTo(".layer3-right", {opacity: 0}, {opacity: 1, duration: 1.8})
+          gsap.fromTo(".layer3-left", {opacity: 0}, {opacity: 1, duration: 1.5})
 
-          gsap.fromTo(".layerThree", {opacity: 0}, {opacity: 1, duration: 1.0, ease:'none'})
+          gsap.fromTo(".layer3", {opacity: 0}, {opacity: 1, duration: 1.0, ease:'none'})
         }
       }
       // layer 4 animations
-      if (roundOff > 63) {
-        console.log(roundOff)
+      if (roundOffScrollPerc > 63) {
+        console.log(roundOffScrollPerc)
         circle4.style.fill = "#F68720";
-        layerFour.classList.add('bg-[#F68720]');
+        layer4.classList.add('layer4-Gradient');
 
         if(countCircle4 === 0 ){
           countCircle4 = countCircle4 + 1;
@@ -165,25 +182,25 @@ function App() {
               },
               onLeaveBack: () => {
                 circle4.style.fill = "none";
-                layerFour.classList.remove('bg-[#F68720]');
+                layer4.classList.remove('layer4-Gradient');
               }             
             }
           })
 
           section4.classList.remove('hidden')
-          gsap.fromTo(".layerFour-right", {opacity: 0, x: -100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.5})
-          gsap.fromTo(".layerFour-left", {opacity: 0, x: 100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.8})        
+          gsap.fromTo(".layer4-right", {opacity: 0, x: -100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.5})
+          gsap.fromTo(".layer4-left", {opacity: 0, x: 100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.8})        
 
-          gsap.fromTo(".layerFour", {opacity: 0}, {opacity: 1, duration: 1.0, ease:'none'})
+          gsap.fromTo(".layer4", {opacity: 0}, {opacity: 1, duration: 1.0, ease:'none'})
         }
       }
       // layer 5 animations
-      if (roundOff > 88) {
-        console.log(roundOff)
+      if (roundOffScrollPerc > 88) {
+        console.log(roundOffScrollPerc)
         circle5.style.fill = "#81BC40";
         if(countCircle5 === 0 ){
           countCircle5 = countCircle5 + 1;
-          layerFive.classList.add('bg-[#81BC40]');
+          layer5.classList.add('layer5-Gradient');
           gsap.to(circle5, {
             scrollTrigger: {
               trigger: circle5,
@@ -192,7 +209,7 @@ function App() {
               scrub: true,
               onEnter: () => {
                 console.log('enter');
-                layerFive.classList.add('bg-[#81BC40]')
+                layer5.classList.add('layer5-Gradient')
               },
               onLeave: () => {
                 console.log('leave');
@@ -201,23 +218,23 @@ function App() {
                 console.log('on leave back -')
                 console.log(circle5)
                 circle5.style.fill = "none";
-                layerFive.classList.remove('bg-[#81BC40]');
+                layer5.classList.remove('bg-[#81BC40]');
               },
               markers: true
             }
           })
 
           section5.classList.remove('hidden')
-          gsap.fromTo(".layerFive-right", {opacity: 0, x: -100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.5})
-          gsap.fromTo(".layerFive-left", {opacity: 0, x: 100}, {opacity: 1, x: 0, delay: 0.5, duration: 1.8})
+          gsap.fromTo(".layer5-right", {opacity: 0}, {opacity: 1, duration: 1.5})
+          gsap.fromTo(".layer5-left", {opacity: 0}, {opacity: 1, duration: 1.8})
 
-          gsap.fromTo(".layerFive", {opacity: 0}, {opacity: 1, duration: 1.0, ease:'none'})
+          gsap.fromTo(".layer5", {opacity: 0}, {opacity: 1, duration: 1.0, ease:'none'})
         }
       }
     });
 
-    gsap.fromTo(".layerOne", {opacity: 0}, {opacity: 1, duration: 2})
-    gsap.fromTo(".sectionOne", {opacity: 0, x: -100}, {opacity: 1, duration: 1, x: 0, color: "#00B5DC"})
+    gsap.fromTo(".layer1", {opacity: 0}, {opacity: 1, duration: 2})
+    gsap.fromTo(".section1", {opacity: 0, x: -100}, {opacity: 1, duration: 1, x: 0, color: "#00B5DC"})
   }, []);
 
   return (
@@ -233,38 +250,42 @@ function App() {
           <circle className="circle5" cx="126" cy="627" r="14" fill="none"/>
         </svg>
       </div>
-      <Layer name="layerOne" color="">
-        <Sections styling="sectionOne flex justify-center items-center text-[5em] font-extrabold">
+      <Layer name="layer1">
+        <Sections styling="section1 flex justify-center items-center text-[5em] font-extrabold">
           Digital!
         </Sections>
       </Layer>
-      <Layer name="layerTwo">
+      <Layer name="layer2">
         <Sections styling="section2 hidden">
-          <div className="flex justify-center items-center gap-8">
-            <img className="layerTwo-right" src="https://picsum.photos/500/300?grayscale" alt="example"></img>
-            <div className="layerTwo-left text-[5em] font-extrabold">QA</div>
+          <div className="flex flex-col gap-6 justify-center items-center text-xl font-extrabold">
+            <div className="text-[5em] font-extrabold">QA</div>
+            <div className="text text1 mt-20">Lorem ipsum.</div>
+            <div className="text text2">dolor sit amet.</div>
+            <div className="text text3">Et veniam accusantium.</div>
           </div>
-          <div className="para text-md mt-10" id="scrollingText">
-          Lorem ipsum dolor sit amet. Et veniam accusantium qui voluptate fugit et eveniet veniam est aliquam aliquid. 
-          </div>
+         
         </Sections>
       </Layer>
-      <Layer name="layerThree">
+      <Layer name="layer3">
         <Sections styling="section3 hidden flex justify-center items-center gap-8">
-          <div className="layerThree-right text-7xl">VIDEO</div>
-          <img className="layerThree-left" src="https://picsum.photos/500/300?grayscale" alt="example"></img>
+        <div className="grid grid-cols-2">
+          <div className="layer2-right flex items-center justify-center">
+            <div className=" text-[5em] font-extrabold">VIDEO</div>
+          </div>
+          <img className="layer2-left" src="https://picsum.photos/500/300?grayscale" alt="example"></img>
+        </div>
         </Sections>
       </Layer>
-      <Layer name="layerFour">
+      <Layer name="layer4">
         <Sections styling="section4 hidden flex justify-center items-center gap-8">
-          <img className="layerFour-right" src="https://picsum.photos/500/300?grayscale" alt="example"></img>
-          <div className="layerFour-left text-7xl">Print</div>
+          <img className="layer4-right" src="https://picsum.photos/500/300?grayscale" alt="example"></img>
+          <div className="layer4-left text-7xl">Print</div>
         </Sections>
       </Layer>
-      <Layer name="layerFive">
+      <Layer name="layer5">
       <Sections styling="section5 hidden flex justify-center items-center gap-8">
-          <img className="layerFive-right" src="https://picsum.photos/500/300?grayscale" alt="example"></img>
-          <div className="layerFive-left text-7xl">CGI</div>
+          <img className="layer5-right" src="https://picsum.photos/500/300?grayscale" alt="example"></img>
+          <div className="layer5-left text-7xl">CGI</div>
         </Sections>
       </Layer>
 

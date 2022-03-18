@@ -29,10 +29,31 @@ section {
   font-family: "Courier New", Courier, monospace;
 }
 
-.layerTwoGradient {
+.layer1-Gradient {
+  @apply bg-gradient-to-t from-[#00B5DC] via-[#39b7d2] to-[#64c8de];
+}
+
+.layer2-Gradient {
   @apply bg-gradient-to-t from-[#d36226] via-[#cb7142] to-[#f4a77e];
 }
 
-.layerThreeGradient {
+.layer3-Gradient {
 @apply bg-gradient-to-r from-[#4d2682] via-[#6424ba] to-[#9e6ce2]
+}
+
+.layer4-Gradient {
+  @apply bg-gradient-to-r from-[#f68720] via-[#f29d4e] to-[#feb572]
+}
+
+.layer5-Gradient {
+  @apply bg-gradient-to-r from-[#81bc40] via-[#9ad657] to-[#adde76]
+
+}
+
+.text {
+  color: black;
+  font-size: 4rem;
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
 }
