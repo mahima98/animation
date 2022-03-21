@@ -2,7 +2,11 @@ module.exports = {
   mode: "jit",
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      backdropBlur: {
+        xs: '4px',
+      }
+    },
   },
   plugins: [],
 };

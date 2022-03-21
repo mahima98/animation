@@ -51,9 +51,9 @@ section {
 }
 
 .text {
-  color: black;
-  font-size: 4rem;
   -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
+
+  @apply text-black text-[1em] md:text-[4em]
 }
